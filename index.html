@@ -69,6 +69,23 @@
       border: 1px solid #ddd;
       font-style: italic;
     }
+
+    .copy-button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .copy-button:hover {
+      background-color: #0056b3;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -109,6 +126,8 @@
     <div class="output" id="output">
       <!-- The generated sentence will appear here -->
     </div>
+    
+    <button id="copyButton" class="copy-button hidden" onclick="copySentence()">Copy</button>
   </div>
 
   <script>
@@ -172,6 +191,22 @@
       const sentence = `Hi at ${eventName} - ${eventDate}, ${eventCategory}, the competitor is at ${competitorPrice} €, we are at ${ourPrice} €. Should I reduce?`;
 
       document.getElementById('output').textContent = sentence;
+      document.getElementById('copyButton').classList.remove('hidden'); // Show the copy button
+    }
+
+    function copySentence() {
+      const sentence = document.getElementById('output').textContent;
+
+      if (!sentence) {
+        return; // If there is no sentence, do nothing
+      }
+
+      // Copy the sentence to clipboard
+      navigator.clipboard.writeText(sentence).then(() => {
+        alert('Sentence copied to clipboard!');
+      }).catch(err => {
+        console.error('Could not copy text: ', err);
+      });
     }
 
     // Listen for Enter key to trigger the generateSentence function
