@@ -201,12 +201,8 @@
         return; // If there is no sentence, do nothing
       }
 
-      // Copy the sentence to clipboard
-      navigator.clipboard.writeText(sentence).then(() => {
-        alert('Sentence copied to clipboard!');
-      }).catch(err => {
-        console.error('Could not copy text: ', err);
-      });
+      // Copy the sentence to clipboard without showing a popup
+      navigator.clipboard.writeText(sentence);
     }
 
     // Listen for Enter key to trigger the generateSentence function
